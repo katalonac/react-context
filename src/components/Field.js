@@ -1,33 +1,16 @@
 import React from 'react';
-import LanguageContext from '../contexts/LanguageContext';
-import ColorContext from '../contexts/ColorContext';
+import LangageContext  from '../contexts/LanguageContext';
 
 class Field extends React.Component {
-  // Getting context object from Consumer component
-  // static contextType = LanguageContext;
-  renderSubmit(value) {
-    return value === 'english' ? 'Name' : 'Ime';
-  }
-
-  renderColor(color) {
-    return color === 'red' ? 'red' : 'blue';
-  }
+  static contextType = LangageContext;
 
   render() {
-    // const text = this.context === 'english' ? 'Name' : 'Ime';
-
     return (
       <div className='ui field'>
-        <ColorContext.Consumer>
-          {(color) => 
-            <label className={`ui ${this.renderColor(color)} ribbon label`}>
-            <LanguageContext.Consumer>
-              {(value) => this.renderSubmit(value)}
-            </LanguageContext.Consumer>
+        <label className={`ui ${this.context.color} ribbon label`}>
+          {this.context.language === 'english' ? 'Name' : 'Ime'} 
           :
           </label>
-          }
-        </ColorContext.Consumer>
         <input />
       </div>
     );
